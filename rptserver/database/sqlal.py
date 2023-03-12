@@ -29,8 +29,8 @@ func_to_date = func.str_to_date
 # ORM 对象基本申明类#
 #####################
 Base = declarative_base()
-# SQLALCHEMY_DATABASE_URL = u"mysql+pymysql://root:aaa111@localhost:3306/777"
-SQLALCHEMY_DATABASE_URL = u"mysql+pymysql://root:aaa111@localhost:3306/777"
+#SQLALCHEMY_DATABASE_URL = u"mysql+pymysql://root:123456@localhost:3306/test"
+SQLALCHEMY_DATABASE_URL = u"mysql+pymysql://root:aaa111@localhost:3306/110"
 
 
 def to_dict(self, convert=True):

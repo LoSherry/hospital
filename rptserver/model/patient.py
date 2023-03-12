@@ -70,7 +70,7 @@ class surgicalPathologicalInfo(Base):
     ryzwdx = Column(String(200), name = '肉眼肿物大小')
     blxfq = Column(String(255), name = '病理学分期')
     bllx = Column(Enum('导管内癌','小叶原位癌','乳头湿疹样乳腺癌','浸润性导管癌','浸润性小叶癌','浸润性特殊癌','其他'), name = '病理类型')
-    blxjtms = Column(String(255), name = '病理具体描述')
+    blxjtms = Column(String(1000), name = '病理具体描述')
 
     zzxfj = Column(Enum('I','II','III','I-II','II-III','其他'), name = '组织学分级')
     zzxfjjtqk = Column(String(100), name = '组织学分级具体情况')
@@ -79,7 +79,7 @@ class surgicalPathologicalInfo(Base):
     jzznqrlbxb = Column(String(255), name = '间质内浸润淋巴细胞')
     hlfy = Column(String(255), name = '化疗反应')
     brsskjazz = Column(Enum('是','否'), name = '保乳手术标本周断端是否可见癌组织')
-    brssbbzdd = Column(String(255), name = '保乳手术标本周断端')
+    brssbbzdd = Column(String(1000), name = '保乳手术标本周断端')
     brssbbbqzdd = Column(String(255), name = '保乳手术标本补切周断端')
     
     lbjqk = Column(String(255), name = '淋巴结情况')
@@ -108,7 +108,7 @@ class familyHistory(Base):
     rxa = Column(Enum('是','否'), name = '乳腺癌家族史')
     lca = Column(Enum('是','否'), name = '卵巢癌家族史')
     qtwxzl = Column(Enum('是','否'), name = '其他恶性肿瘤家族史') 
-    qs = Column(String(20), name = '亲属')
+    # qs = Column(String(20), name = '亲属')
     xqs = Column(String(100), name = 'x级亲属')
 
 class patientHistory(Base):
@@ -157,7 +157,8 @@ class clinicalFeature(Base):
     tnm = Column(String(100), name = '临床TNM分期') 
     zlbzqzfs = Column(Enum('术前开放活检','术中开放活检','穿刺粗针吸','穿刺细针吸'), name = '肿瘤病灶确诊方式')  
     lbjqzfs = Column(Enum('无','粗针吸','细针吸','术前淋巴结活检'), name = '淋巴结确诊方式') 
-    qzblh = Column(String(100), name = '确诊病理号')  
+    qzblh = Column(String(100), name = '确诊病理信息')  
+    sfxmyzh = Column(Enum('是','否'), name = '是否行免疫组化')
     
     er = Column(String(100), name = '肿瘤病灶穿刺ER') 
     pr = Column(String(100), name = '肿瘤病灶穿刺PR') 
@@ -204,15 +205,21 @@ class clinicalFeature(Base):
     yczyfcopy = Column(String(100), name = '远处转移灶FISH copy数')
     yczyfratio =  Column(String(100), name = '远处转移灶FISH ratio') 
     
+    xfzzl = Column(Enum('是','否'), name = '术前是否行新辅助治疗')
     xfzzlkssj = Column(DateTime, doc="新辅助治疗开始时间", name = '新辅助治疗开始时间')
-    xfzzlfa = Column(String(100), name = '新辅助治疗方案及周期') 
-    xfzzlpg = Column(String(100), name = '新辅助治疗过程评估') 
-    xfzzlpj = Column(Enum('完全缓解','部分缓解','疾病进展','疾病稳定'), name = '新辅助治疗疗效评价') 
+    xfzzlfa = Column(String(1000), name = '新辅助治疗方案及周期') 
+    xfzlc = Column(Enum('是','否'), name = '新辅助治疗期间是否使用卵巢功能抑制剂')
+    xfzlcyw = Column(String(255), name = '新辅助治疗卵巢功能抑制剂具体药物名称') 
+    xfzzlpg = Column(String(1000), name = '新辅助治疗过程评估') 
+    xfzzlpj = Column(Enum('CR','PR','SD','PD'), name = '新辅助治疗疗效评价') 
     
-    sqzlkssj = Column(DateTime, doc="术前治疗开始时间", name = '术前治疗开始时间')
-    sqzlfa = Column(String(100), name = '术前治疗方案及周期') 
-    sqzlpg = Column(String(100), name = '术前治疗过程评估') 
-    sqzlpj = Column(Enum('完全缓解','部分缓解','疾病进展','疾病稳定'), name = '术前治疗疗效评价') 
+    jjzl = Column(Enum('是','否'), name = '术前是否行解救治疗')
+    sqzlkssj = Column(DateTime, doc="术前解救治疗开始时间", name = '术前解救治疗开始时间')
+    sqzlfa = Column(String(1000), name = '术前解救治疗方案及周期') 
+    jjlc = Column(Enum('是','否'), name = '术前解救治疗期间是否使用卵巢功能抑制剂')
+    jjlcyw = Column(String(255), name = '术前解救治疗卵巢功能抑制剂具体药物名称') 
+    sqzlpg = Column(String(1000), name = '术前解救治疗过程评估') 
+    sqzlpj = Column(Enum('CR','PR','SD','PD'), name = '术前解救治疗疗效评价') 
     
 class patientMenstruationHistory(Base):
     """月经史表"""
@@ -261,7 +268,7 @@ class patientFollow(Base):
     
     dfs = Column(String(255), name = 'DFS') 
     os = Column(String(255), name = 'OS') 
-    mcfcsj = Column(DateTime, doc="末次随访时间", name = '末次随访时间')
+    mcfcsj = Column(DateTime, doc="末次复查时间（截止查病历时/电话随诊）", name = '末次复查时间（截止查病历时/电话随诊）')
     syqk = Column(String(255), name = '治疗后生育情况') 
     syfaz = Column(Enum('无','对侧乳腺','非同侧胸壁','区域淋巴结','其他原发癌'), name = '双原发癌症') 
     syfazjtxq = Column(String(255), name = '双原发癌症具体详情')
@@ -280,21 +287,23 @@ class postoperativeTreatment(Base):
     bhzyid = Column(Integer, name = '滨海住院号')
     hxzyid = Column(Integer, name = '河西住院号')
     
-    shhl = Column(Enum('是','否'), name = '术后化疗')
+    shhl = Column(Enum('是','否',''), name = '术后化疗')
     hlkssj = Column(DateTime, doc="术后化疗开始时间", name = '术后化疗开始时间')
-    shhlfam = Column(String(50), name = '术后化疗方案') 
+    shhlfam = Column(String(1000), name = '术后化疗方案')
+    hllc = Column(Enum('是','否',''), name = '术后化疗期间是否使用卵巢功能抑制剂')
+    hllcyw = Column(String(255), name = '术后化疗卵巢功能抑制剂具体药物名称') 
     shhlxq = Column(String(255), name = '术后化疗详情') 
-    shnfmzl = Column(Enum('是','否'), name = '术后内分泌治疗')
+    shnfmzl = Column(Enum('是','否',''), name = '术后内分泌治疗')
     nfmzlkssj = Column(DateTime, doc="术后内分泌治疗开始时间", name = '术后内分泌治疗开始时间')
     nfmzlym = Column(String(255), name = '术后内分泌治疗药物') 
     nfmzlfzy = Column(String(255), name = '内分泌治疗副作用') 
-    shbxzl = Column(Enum('是','否'), name = '是否术后靶向治疗')
+    shbxzl = Column(Enum('是','否',''), name = '是否术后靶向治疗')
     bxzlkssj = Column(DateTime, doc="术后靶向治疗开始时间", name = '术后靶向治疗开始时间')
     bxzlym = Column(String(255), name = '术后靶向治疗具体药物')
-    shfl = Column(Enum('是','否'), name = '术后放疗')
+    shfl = Column(Enum('是','否',''), name = '术后放疗')
     flkssj = Column(DateTime, doc="术后放疗开始时间", name = '术后放疗开始时间')
     flbz = Column(String(255), name = '术后放疗备注') 
-    shmyzl = Column(Enum('是','否'), name = '术后免疫治疗') 
+    shmyzl = Column(Enum('是','否',''), name = '术后免疫治疗') 
     myzlsj = Column(DateTime, doc="术后免疫治疗开始时间", name = '术后免疫治疗开始时间')
     myzlbz = Column(String(255), name = '术后免疫治疗备注')
 
@@ -314,8 +323,8 @@ class relapseInformation(Base):
     ffqzsd = Column(Enum('无','粗针吸穿刺','细针吸穿刺','开放活检'), name = '复发确诊手段') 
     ffbzblxx = Column(String(255), name = '复发病灶病理信息') 
     ffbzymzh = Column(String(255), name = '复发病灶免疫组化') 
-    ffhzl = Column(String(255), name = '复发后治疗') 
-    ffxgpj = Column(String(255), name = '复发后治疗效果评价') 
+    ffhzl = Column(String(1000), name = '复发后治疗') 
+    ffxgpj = Column(Enum('CR','PR','SD','PD',''), name = '复发后治疗效果评价') 
 
 class gene21Detection(Base):
     """gene21_detection"""

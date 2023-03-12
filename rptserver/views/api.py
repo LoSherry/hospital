@@ -88,7 +88,8 @@ class PatientInfo(Resource):
             fields.Nested(
                 _NS.model('PatientListGetDataModel', {
                             'id' : fields.Integer(required=True, description='编号'),
-                            'zyid': fields.Integer(required=True, description='住院号'),
+                            'bhzyid': fields.Integer(required=True, description='滨海住院号'),
+                            'hxzyid': fields.Integer(required=True, description='河西住院号'),
                             'name' : fields.String(description='姓名'),
                             'phone1' : fields.String(description="联系电话1"),
                             'phone2' : fields.String(description="联系电话2"),
@@ -116,39 +117,33 @@ class PatientInfo(Resource):
         args = self.get_parser.parse_args()
         return _PatientService.query(**args)
 
-@_NS.route('/info/detail')
-class Detail(Resource):
-    
-    get_parser = reqparse.RequestParser()
-    get_parser.add_argument('id', help="病人id", type=int, required=True)
-    get_model = _NS.model("DetailModel", {
-                            'id' : fields.Integer(required=True, description='编号'),
-                            'zyid': fields.Integer(required=True, description='住院号'),
-                            'name' : fields.String(description='姓名'),
-                            'phone1' : fields.String(description="联系电话1"),
-                            'phone2' : fields.String(description="联系电话2"),
-                            'sex' : fields.String(description='性别' ),
-                            'marital_status':fields.String(description="婚姻状况"),
-                            "age" : fields.Integer(description='初诊年龄'),
-                            'mz' : fields.String(description="民族"),
-                            'job' : fields.String(description="职业"),
-                            'jg' : fields.String(description="籍贯"),
-                            'addr' : fields.String(description="现地址"),
-                            'fbDate': fields.DateTime(required=False, description='发现日期'),
-                            'ryDate': fields.DateTime(required=False, description='入院日期'),
-                            'cert_id' : fields.String(description="身份证号"),
-                            'birthday': fields.DateTime(required=False, description='出生日期'),
-                            'tall' : fields.Float(description="身高"),
-                            'weight' : fields.Float(description="体重"),
-                            'bmi' : fields.Float(description="BMI")
-    })
+@_NS.route('/info/bhdetail')
+class Detail1(Resource):
 
+    """通过滨海住院号获取病人信息"""
+   
+    get_parser = reqparse.RequestParser()
+    get_parser.add_argument('bhzyid', help="滨海住院号", type=int, required=True, default=None) 
+    
     @_NS.expect(get_parser)
-    @_NS.marshal_with(get_model, as_list=True)
     def get(self):
         args = self.get_parser.parse_args()
-        
-        return _PatientService.getDetail(**args)
+        data =  _PatientService.getDetail1(**args)
+        return data
+    
+@_NS.route('/info/hxdetail')
+class Detail2(Resource):
+
+    """通过河西住院号获取病人信息"""
+   
+    get_parser = reqparse.RequestParser()
+    get_parser.add_argument('hxzyid', help="河西住院号", type=int, required=True, default=None) 
+    
+    @_NS.expect(get_parser)
+    def get(self):
+        args = self.get_parser.parse_args()
+        data =  _PatientService.getDetail2(**args)
+        return data
 
 @_NS.route('/info/search')
 class Search(Resource):
@@ -163,7 +158,8 @@ class Search(Resource):
             fields.Nested(
                 _NS.model('PatientListGetDataModel', {
                             'id' : fields.Integer(required=True, description='编号'),
-                            'zyid': fields.Integer(required=True, description='住院号'),
+                            'bhzyid': fields.Integer(required=True, description='滨海住院号'),
+                            'hxzyid': fields.Integer(required=True, description='河西住院号'),
                             'name' : fields.String(description='姓名'),
                             'phone1' : fields.String(description="联系电话1"),
                             'phone2' : fields.String(description="联系电话2"),

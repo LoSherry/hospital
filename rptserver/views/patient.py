@@ -178,7 +178,6 @@ class familyHistory(Resource):
     post_parser.add_argument('rxa', help="乳腺癌家族史", type=str, required=False,choices=('是','否'))
     post_parser.add_argument('lca', help="卵巢癌家族史", type=str, required=False,choices=('是','否'))
     post_parser.add_argument('qtwxzl', help="其他恶性肿瘤家族史", type=str, required=True ,choices=('是','否'))
-    post_parser.add_argument('qs', help="亲属", type=str, required=False)
     post_parser.add_argument('xqs', help="x级亲属", type=str, required=False)
 
     post_model = _NS.model('familyHistoryPostModel', {
@@ -253,7 +252,8 @@ class clinicalFeature(Resource):
     post_parser.add_argument('tnm', help="临床TNM分期", type=str, required=False)
     post_parser.add_argument('zlbzqzfs', help="肿瘤病灶确诊方式", type=str, required=True, choices=('术前开放活检','术中开放活检','穿刺粗针吸','穿刺细针吸'))
     post_parser.add_argument('lbjqzfs', help="确诊方式", type=str, required=True, choices=('无','粗针吸','细针吸','术前淋巴结活检'))
-    post_parser.add_argument('qzblh', help="确诊病理号", type=str, required=False)
+    post_parser.add_argument('qzblh', help="确诊病理信息", type=str, required=False)
+    post_parser.add_argument('sfxmyzh', help="是否行免疫组化", type=str, required=True, choices=('是','否'))
     
     post_parser.add_argument('er', help="肿瘤病灶穿刺ER", type=str, required=False)
     post_parser.add_argument('pr', help="肿瘤病灶穿刺PR", type=str, required=False)
@@ -300,15 +300,21 @@ class clinicalFeature(Resource):
     post_parser.add_argument('yczyfcopy', help="远处转移灶FISH copy数", type=str, required=False)
     post_parser.add_argument('yczyfratio', help="远处转移灶FISH ratio", type=str, required=False)
 
+    post_parser.add_argument('xfzzl', help="术前是否行新辅助治疗", type=str, required=True, choices=('是','否'))
     post_parser.add_argument('xfzzlkssj', help="新辅助治疗开始时间", type=str, required=False)
     post_parser.add_argument('xfzzlfa', help="新辅助治疗方案及周期", type=str, required=False)
+    post_parser.add_argument('xfzlc', help="新辅助治疗期间是否使用卵巢功能抑制剂", type=str, required=False,choices=('是','否'))
+    post_parser.add_argument('xfzlcyw', help="新辅助治疗卵巢功能抑制剂具体药物名称", type=str, required=False)
     post_parser.add_argument('xfzzlpg', help="新辅助治疗过程评估", type=str, required=False)
-    post_parser.add_argument('xfzzlpj', help="新辅助治疗疗效评价", type=str, required=True, choices=('完全缓解','部分缓解','疾病进展','疾病稳定'))
+    post_parser.add_argument('xfzzlpj', help="新辅助治疗疗效评价", type=str, required=True, choices=('CR','PR','SD','PD'))
 
-    post_parser.add_argument('sqzlkssj', help="术前治疗开始时间", type=str, required=False)
-    post_parser.add_argument('sqzlfa', help="术前治疗方案及周期", type=str, required=False)
-    post_parser.add_argument('sqzlpg', help="术前治疗过程评估", type=str, required=False)
-    post_parser.add_argument('sqzlpj', help="术前治疗疗效评价", type=str, required=True, choices=('完全缓解','部分缓解','疾病进展','疾病稳定'))
+    post_parser.add_argument('jjzl', help="术前是否行解救治疗", type=str, required=True, choices=('是','否'))
+    post_parser.add_argument('sqzlkssj', help="术前解救治疗开始时间", type=str, required=False)
+    post_parser.add_argument('sqzlfa', help="术前解救治疗方案及周期", type=str, required=False)
+    post_parser.add_argument('jjlc', help="术前解救治疗期间是否使用卵巢功能抑制剂", type=str, required=False,choices=('是','否'))
+    post_parser.add_argument('jjlcyw', help="术前解救治疗卵巢功能抑制剂具体药物名称", type=str, required=False)
+    post_parser.add_argument('sqzlpg', help="术前解救治疗过程评估", type=str, required=False)
+    post_parser.add_argument('sqzlpj', help="术前解救治疗疗效评价", type=str, required=True, choices=('CR','PR','SD','PD'))
 
     post_model = _NS.model('clinicalFeaturePostModel', {
         'message': fields.String(required=True, description='消息'),
@@ -398,7 +404,7 @@ class patientFollow(Resource):
     post_parser.add_argument('hxzyid', help="河西住院号", type=int, required=False, default=None)
     post_parser.add_argument('dfs', help="DFS", type=str, required=False)
     post_parser.add_argument('os', help="OS", type=str, required=False)
-    post_parser.add_argument('mcfcsj', help="末次随访时间", type=str, required=False)
+    post_parser.add_argument('mcfcsj', help="末次复查时间（截止查病历时/电话随诊）", type=str, required=False)
     post_parser.add_argument('syqk', help="治疗后生育情况", type=str, required=False)
     post_parser.add_argument('syfaz', help="双原发癌症", type=str, required=True, choices=('无','对侧乳腺','非同侧胸壁','区域淋巴结','其他原发癌'))
     post_parser.add_argument('syfazjtxq', help="双原发癌症具体详情", type=str, required=False)
@@ -432,6 +438,8 @@ class postoperativeTreatment(Resource):
     post_parser.add_argument('shhl', help="术后化疗", type=str, required=True, choices=('是','否'))
     post_parser.add_argument('hlkssj', help="术后化疗开始时间", type=str, required=False)
     post_parser.add_argument('shhlfam', help="术后化疗方案", type=str, required=False)
+    post_parser.add_argument('hllc', help="术前解救治疗期间是否使用卵巢功能抑制剂", type=str, required=False,choices=('是','否'))
+    post_parser.add_argument('hllcyw', help="术前解救治疗卵巢功能抑制剂具体药物名称", type=str, required=False)
     post_parser.add_argument('shhlxq', help="术后化疗详情", type=str, required=False)
     post_parser.add_argument('shnfmzl', help="术后内分泌治疗", type=str, required=True, choices=('是','否'))
     post_parser.add_argument('nfmzlkssj', help="术后内分泌治疗开始时间", type=str, required=False)
@@ -477,7 +485,7 @@ class relapseInformation(Resource):
     post_parser.add_argument('ffbzblxx', help="复发病灶病理信息", type=str, required=False)
     post_parser.add_argument('ffbzymzh', help="复发病灶免疫组化", type=str, required=False)
     post_parser.add_argument('ffhzl', help="复发后治疗", type=str, required=False)
-    post_parser.add_argument('ffxgpj', help="复发后治疗效果评价", type=str, required=True, choices=('是','否'))
+    post_parser.add_argument('ffxgpj', help="复发后治疗效果评价", type=str, required=True, choices=('CR','PR','SD','PD',''))
     
 
     post_model = _NS.model('relapseInformationPostModel', {
@@ -709,4 +717,4 @@ class samplingRecurrenceMetastasisSpecimens(Resource):
         '复发转移灶标本采样表'
         args = self.post_parser.parse_args()
         data = _PatientService.add_sampling_recurrence_metastasis_specimens(**args)
-        return data 
+        return data
