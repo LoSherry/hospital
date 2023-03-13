@@ -178,6 +178,7 @@ class familyHistory(Resource):
     post_parser.add_argument('rxa', help="乳腺癌家族史", type=str, required=False,choices=('是','否'))
     post_parser.add_argument('lca', help="卵巢癌家族史", type=str, required=False,choices=('是','否'))
     post_parser.add_argument('qtwxzl', help="其他恶性肿瘤家族史", type=str, required=True ,choices=('是','否'))
+    post_parser.add_argument('qtwxzljtqk', help="其他恶性肿瘤家族史具体情况", type=str, required=False)
     post_parser.add_argument('xqs', help="x级亲属", type=str, required=False)
 
     post_model = _NS.model('familyHistoryPostModel', {

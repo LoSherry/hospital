@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 12/03/2023 13:17:14
+ Date: 13/03/2023 19:18:56
 */
 
 SET NAMES utf8mb4;
@@ -108,7 +108,7 @@ CREATE TABLE `clinical_feature`  (
   `术前解救治疗过程评估` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `术前解救治疗疗效评价` enum('CR','PR','SD','PD','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6002 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '临床特征表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8262 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '临床特征表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for family_history
@@ -122,9 +122,10 @@ CREATE TABLE `family_history`  (
   `乳腺癌家族史` enum('是','否','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `卵巢癌家族史` enum('是','否','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `其他恶性肿瘤家族史` enum('是','否','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `其他恶性肿瘤家族史具体情况` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `x级亲属` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '家族史表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '家族史表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for gene21_detection
@@ -142,7 +143,7 @@ CREATE TABLE `gene21_detection`  (
   `备注` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `具体详情` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '21基因信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '21基因信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for gene70_detection
@@ -160,7 +161,7 @@ CREATE TABLE `gene70_detection`  (
   `备注` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `具体详情` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '70基因信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '70基因信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for genebrca_detection
@@ -178,7 +179,7 @@ CREATE TABLE `genebrca_detection`  (
   `备注` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `具体详情` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'brca基因信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'brca基因信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for patient
@@ -206,7 +207,7 @@ CREATE TABLE `patient`  (
   `身高` float NULL DEFAULT NULL,
   `BMI` float NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1006 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '患者基本信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1167 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '患者基本信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for patient_follow
@@ -229,7 +230,7 @@ CREATE TABLE `patient_follow`  (
   `双原发癌症首次发生时间` datetime NULL DEFAULT NULL,
   `随访备注` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病人跟踪记录表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病人跟踪记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for patient_history
@@ -244,7 +245,7 @@ CREATE TABLE `patient_history`  (
   `是否饮酒` enum('是','否','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `具体饮酒量` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '个人史表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '个人史表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for patient_marry_history
@@ -267,7 +268,7 @@ CREATE TABLE `patient_marry_history`  (
   `哺乳侧别` enum('左','右','双','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `哺乳时长` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6246 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '婚育史表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6407 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '婚育史表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for patient_menstruation_history
@@ -286,7 +287,7 @@ CREATE TABLE `patient_menstruation_history`  (
   `末次月经` date NULL DEFAULT NULL,
   `绝经年龄` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '月经表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '月经表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for peripheral_blood_sample_sampling
@@ -311,7 +312,7 @@ CREATE TABLE `peripheral_blood_sample_sampling`  (
   `取用用途` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `取用备注` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '外周血标本采样表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '外周血标本采样表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for postoperative_treatment
@@ -341,7 +342,7 @@ CREATE TABLE `postoperative_treatment`  (
   `术后免疫治疗开始时间` date NULL DEFAULT NULL,
   `术后免疫治疗备注` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '术后治疗表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5368 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '术后治疗表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for previous_history
@@ -365,7 +366,7 @@ CREATE TABLE `previous_history`  (
   `是否有恶性肿瘤既往史` enum('是','否','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `恶性肿瘤既往史具体情况` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '既往史表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '既往史表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for recorder_information
@@ -380,7 +381,7 @@ CREATE TABLE `recorder_information`  (
   `末次随访人` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `末次随访时间` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '记录人员信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '记录人员信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for recurrent_distant_metastasis
@@ -399,7 +400,7 @@ CREATE TABLE `recurrent_distant_metastasis`  (
   `远处转移治疗` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `远处转移治疗效果评价` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '远处转移信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1274 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '远处转移信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for relapse_information
@@ -419,7 +420,7 @@ CREATE TABLE `relapse_information`  (
   `复发后治疗` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `复发后治疗效果评价` enum('CR','PR','SD','PD','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '复发信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1057 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '复发信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for sampling_recurrence_metastasis_specimens
@@ -446,7 +447,7 @@ CREATE TABLE `sampling_recurrence_metastasis_specimens`  (
   `取用用途` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `取用备注` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '复发转移灶标本采样表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '复发转移灶标本采样表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for surgical_pathological_info
@@ -490,7 +491,7 @@ CREATE TABLE `surgical_pathological_info`  (
   `HER2-FISH COPY数` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `HER2-FISH RATIO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`编号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '手术病理信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3077 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '手术病理信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for user

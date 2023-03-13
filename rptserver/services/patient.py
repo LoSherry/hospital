@@ -221,6 +221,7 @@ class PatientService(object):
                 'rxa' : qst.rxa,
                 'lca' : qst.lca,
                 'qtwxzl' : qst.qtwxzl,
+                'qtwxzljtqk' : qst.qtwxzljtqk,
                 'xqs' : qst.xqs,
             }
         
@@ -1365,6 +1366,7 @@ class PatientService(object):
                 "乳腺癌家族史" : "rxa",
                 "卵巢癌家族史" : "lca",
                 "其他恶性肿瘤家族史" : "qtwxzl",
+                "其他恶性肿瘤家族史具体情况":"qtwxzljtqk",
                 "x级亲属" : "xqs"
             }
             df = upload_excel(filename, name_dict)

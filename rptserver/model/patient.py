@@ -108,7 +108,7 @@ class familyHistory(Base):
     rxa = Column(Enum('是','否'), name = '乳腺癌家族史')
     lca = Column(Enum('是','否'), name = '卵巢癌家族史')
     qtwxzl = Column(Enum('是','否'), name = '其他恶性肿瘤家族史') 
-    # qs = Column(String(20), name = '亲属')
+    qtwxzljtqk = Column(String(255), name = '其他恶性肿瘤家族史具体情况')
     xqs = Column(String(100), name = 'x级亲属')
 
 class patientHistory(Base):
